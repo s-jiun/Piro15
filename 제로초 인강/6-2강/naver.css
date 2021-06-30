@@ -1,0 +1,336 @@
+/*선택자(selector)*/
+/*div는 생략 가능*/
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕",
+    helvetica, "Apple SD Gothic Neo", sans-serif;
+}
+
+.blind {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.center-align {
+  margin: 0 auto;
+  width: 1080px;
+}
+
+header {
+  height: 170px;
+}
+
+#header-top {
+  float: right;
+  margin-top: 8px;
+}
+
+#header-top span:first-child {
+  font-size: 11px;
+  color: #404040;
+}
+
+#header-top span:nth-child(2) {
+  display: inline-block;
+  width: 60px;
+  height: 10px;
+  background-position: -333px -267px;
+  background-repeat: no-repeat;
+  margin: 3px;
+  background-image: url(https://s.pstatic.net/static/www/img/uit/2021/sp_main_4efc7a.png);
+  background-size: 440px 408px;
+  position: relative;
+  top: 5px;
+}
+
+#header-top span:last-child {
+  font-size: 11px;
+  color: #404040;
+}
+
+#header-search {
+  clear: both;
+  padding-top: 20px;
+}
+
+/*a 태그의 밑줄 삭제*/
+
+#header-search a {
+  text-decoration: none;
+}
+
+/* 자식은 >로 선택하고 자손은 띄어쓰기*/
+
+#header-search h1 {
+  width: 222px;
+  height: 56px;
+  display: inline-block;
+  background: url(./sp_main_logo.png) 0 4px no-repeat;
+  vertical-align: bottom;
+  position: relative;
+  top: 5px;
+}
+
+#header-search h1 span {
+  display: none;
+}
+
+#header-search h2 {
+  display: none;
+}
+
+#header-search fieldset {
+  margin-left: 18px;
+  padding: 12px 0 12px 10px; /*위 오른쪽 아래 왼쪽 (시계방향)*/
+  width: 586px;
+  height: 56px;
+  display: inline-block;
+  border: 2px solid #03cf5d; /*hex*/
+  position: relative;
+}
+
+#header-search fieldset input {
+  border: none;
+  padding: 0;
+  outline: none;
+  vertical-align: top;
+  width: 444px;
+  height: 24px;
+  display: inline-block;
+}
+
+#header-search fieldset button {
+  width: 52px;
+  height: 52px;
+  border: none;
+  padding: 0;
+  background: url(./sp_main_button.png) #03cf5d 15px 13px no-repeat;
+  margin: 0;
+  background-size: 25px 25px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#search-keyboard {
+  background-image: url(https://s.pstatic.net/static/www/img/uit/2021/sp_main_4efc7a.png);
+  background-position: -420px -267px;
+  background-repeat: no-repeat;
+  background-size: 440px 408px;
+  position: absolute;
+  top: 47%;
+  left: 80%;
+  display: inline-block;
+  width: 20px;
+  height: 12px;
+}
+
+#search-history {
+  background-image: url(https://s.pstatic.net/static/www/img/uit/2021/sp_main_4efc7a.png);
+  background-position: -170px -151px;
+  background-repeat: no-repeat;
+  vertical-align: top;
+  background-size: 440px 408px;
+  display: inline-block;
+  width: 10px;
+  height: 5px;
+  position: absolute;
+  top: 50%;
+  left: 86%;
+}
+
+nav {
+  height: 46px;
+  border-top: 1px solid #f1f3f6;
+  border-bottom: 1px solid #f1f3f6;
+}
+
+nav ul {
+  margin: 0;
+  padding: 11px 0 0 4px;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+}
+
+.format-green {
+  text-decoration: none;
+  margin-left: 14px;
+  color: #03cf5d;
+  font-size: 15px;
+  line-height: 30px;
+  font-weight: 800;
+}
+
+.format-black {
+  text-decoration: none;
+  margin-left: 14px;
+  color: black;
+  font-size: 15px;
+  line-height: 30px;
+  font-weight: 800;
+}
+
+nav li:first-child span:first-child {
+  background-image: url(https://s.pstatic.net/static/www/img/uit/2021/sp_main_4efc7a.png);
+  background-repeat: no-repeat;
+  margin-top: 4px;
+  vertical-align: top;
+  background-size: 440px 408px;
+  display: inline-block;
+  height: 21px;
+  width: 25px;
+  background-position: -46px -386px;
+  margin-left: 0;
+  position: relative;
+  top: -3px;
+}
+
+nav li:nth-child(2) span:first-child {
+  margin-left: 0;
+}
+
+nav li:nth-child(6) span:first-child {
+  background-image: url(https://s.pstatic.net/static/www/img/uit/2021/sp_main_4efc7a.png);
+  background-repeat: no-repeat;
+  margin-left: 14px;
+  margin-top: 4px;
+  background-size: 440px 408px;
+  display: block;
+  height: 20px;
+  width: 54px;
+  background-position: -270px -245px;
+}
+
+nav li:nth-child(8) span:first-child {
+  background-image: url(https://s.pstatic.net/static/www/img/uit/2021/sp_main_4efc7a.png);
+  background-repeat: no-repeat;
+  margin-left: 14px;
+  margin-top: 4px;
+  vertical-align: top;
+  background-size: 440px 408px;
+  display: inline-block;
+  width: 12px;
+  height: 14px;
+  background-position: -401px -245px;
+}
+
+nav li:nth-child(9) span:first-child {
+  margin-left: 0;
+}
+
+.nav-divider {
+  display: inline-block;
+  margin: 16px 16px 0;
+  width: 1px;
+  height: 14px;
+  background: #ebeef3;
+}
+
+#search-ranking {
+  float: right;
+  position: relative;
+  top: 16px;
+  right: 100px;
+}
+
+#rank-number {
+  margin-top: -9px;
+  color: #00ab33;
+  font-size: 16px;
+}
+
+main {
+  background-color: #f2f4f7;
+  display: inline-block;
+  width: 100%;
+}
+
+#main-ad {
+  display: inline-block;
+  width: 740px;
+  height: 120px;
+  background-color: white;
+}
+
+#main-login {
+  display: inline-block;
+  width: 332px;
+  height: 120px;
+  vertical-align: top;
+  background-color: white;
+}
+
+#main-ytn {
+  display: inline-block;
+  width: 740px;
+  height: 46px;
+  background-color: white;
+}
+
+#main-newstand {
+  display: inline-block;
+  width: 740px;
+  height: 246px;
+  background-color: white;
+}
+
+#main-weather {
+  display: inline-block;
+  width: 332px;
+  height: 142px;
+  background-color: white;
+}
+
+#main-second-ad {
+  display: inline-block;
+  width: 332px;
+  height: 150px;
+  background: #555;
+}
+
+#main-category {
+  display: inline-block;
+  width: 740px;
+  height: 837px;
+  background: white;
+}
+
+#main-shopping {
+  display: inline-block;
+  width: 332px;
+  height: 837px;
+  background: white;
+}
+
+#main-event {
+  display: inline-block;
+  width: 740px;
+  height: 130px;
+  background: white;
+  vertical-align: top;
+}
+
+#main-third-ad {
+  display: inline-block;
+  width: 332px;
+  height: 130px;
+  background: #555;
+}
+
+#main-centered {
+  padding: 8px 10px 0;
+  width: 1100px;
+}
