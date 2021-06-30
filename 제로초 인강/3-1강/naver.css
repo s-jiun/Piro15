@@ -1,0 +1,23 @@
+/*선택자(selector)*/
+/*div는 생략 가능*/
+
+#header-center {
+  margin: 0 auto;
+  width: 1080px;
+}
+
+/* 자식은 >로 선택하고 자손은 띄어쓰기*/
+
+#header-search > h1 {
+  width: 222px;
+  display: inline-block;
+}
+
+#header-search h2 {
+  display: none;
+}
+
+#header-search fieldset {
+  width: 520px;
+  display: inline-block;
+}
