@@ -1,0 +1,59 @@
+/*선택자(selector)*/
+/*div는 생략 가능*/
+
+* {
+  box-sizing: border-box;
+}
+
+.blind {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+
+#header-center {
+  margin: 0 auto;
+  width: 1080px;
+}
+
+/*a 태그의 밑줄 삭제*/
+
+#header-search a {
+  text-decoration: none;
+}
+
+/* 자식은 >로 선택하고 자손은 띄어쓰기*/
+
+#header-search h1 {
+  width: 222px;
+  height: 56px;
+  display: inline-block;
+  background: url(./sp_main_logo.png) 0 4px no-repeat;
+  vertical-align: bottom;
+}
+
+#header-search h1 span {
+  display: none;
+}
+
+#header-search h2 {
+  display: none;
+}
+
+#header-search fieldset {
+  margin-left: 20px;
+  padding: 12px 0 12px 10px; /*위 오른쪽 아래 왼쪽 (시계방향)*/
+  width: 586px;
+  height: 56px;
+  display: inline-block;
+  border: 2px solid #03cf5d; /*hex*/
+}
+
+#header-search fieldset input {
+  border: none;
+  padding: 0;
+  outline: none;
+}
