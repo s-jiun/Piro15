@@ -16,6 +16,10 @@ class GradingError(Exception):
     def __init__(self):
         super().__init__("There is a student who didn't get grade")
 
+class NoSuchDataError(Exception):
+    def __init__(self):
+        super().__init__("Not exist name!")
+
 def Menu1(name, mid_score, final_score):
     student_info[name] = [mid_score, final_score]
 
@@ -41,6 +45,12 @@ def Menu3():
     for name in list(student_info.keys()):
         print("{0}\t{1}\t{2}\t{3}".format(name, student_info[name][0], student_info[name][1], student_info[name][2]))
         
+def Menu4(del_name):
+    if del_name not in student_info:
+        raise NoSuchDataError
+    else:
+        del student_info[del_name]
+        print("{0} student information is deleted.".format(del_name))
 
 print("*Menu*******************************")
 print("1. Inserting students Info(name score1 score2)")
@@ -62,8 +72,13 @@ while True :
                 raise OutOfRangeError
             elif final_score < 0 or final_score > 100:
                 raise OutOfRangeError
-        except ValueError as e:
-            print(e)
+        except ValueError:
+            try:
+                a = mid_score
+            except NameError:
+                print("Num of data is not 3!")
+            else:
+                print("Score is not positive integer!")
         except ExistingKeyError as e:
             print(e)
         except OutOfRangeError as e:
@@ -93,5 +108,26 @@ while True :
                         continue
         except GradingError as e:
             print(e)
+        except EmptyDictError as e:
+            print(e)
         else:
             Menu3()
+
+    elif choice == "4" :
+        try:
+            if bool(student_info) == False:
+                raise EmptyDictError
+            else:
+                del_name = input("Enter the name to delete :")
+                Menu4(del_name)
+        except EmptyDictError as e:
+            print(e)
+        except NoSuchDataError as e:
+            print(e)
+
+    elif choice == "5" :
+        print("Exit Program!")
+        break
+
+    else:
+        print("Wrong number. Choose again.")
