@@ -1,3 +1,5 @@
+import random
+
 class OutOfRangeError(Exception):
     pass
 
@@ -12,26 +14,16 @@ game_num = 0
 
 while game_num < 31:
     
-    while True:
-        try:
-            num = brGame()
-        except ValueError:
-            print("정수를 입력하세요")
-            continue
-        except OutOfRangeError:
-            print("1,2,3 중 하나를 입력하세요")
-            continue
-        else:
-            break
+    num = random.randint(1,3)
 
     for i in range(num):
         game_num += 1
-        print("PlayerA : {0}".format(game_num))
+        print("computer : {0}".format(game_num))
         if game_num == 31:
             break
         
     if game_num == 31:
-        print("PlayerA win!")
+        print("player win!")
         break
 
     while True:
@@ -48,10 +40,10 @@ while game_num < 31:
 
     for i in range(num):
         game_num += 1
-        print("PlayerB : {0}".format(game_num))
+        print("player : {0}".format(game_num))
         if game_num == 31:
             break
         
     if game_num == 31:
-        print("PlayerB win!")
+        print("computer win!")
         break
