@@ -16,3 +16,6 @@ while True:
         continue
     else:
         break
+
+for i in range(num):
+    print("PlayerA : {0}".format(i+1))
