@@ -27,6 +27,7 @@ while game_num < 31:
             break
         
     if game_num == 31:
+        print("PlayerA win!")
         break
 
     while True:
@@ -50,4 +51,5 @@ while game_num < 31:
             break
         
     if game_num == 31:
+        print("PlayerB win!")
         break
