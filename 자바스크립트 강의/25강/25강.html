@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Understanding JavaScript's Capture</title>
+</head>
+<body class="bod">
+
+  <div class="one">
+    <div class="two">
+      <div class="three">
+      </div>
+    </div>
+  </div>
+
+<style>
+  html {
+    box-sizing: border-box;
+  }
+  
+  *, *:before, *:after { 
+    box-sizing: inherit; 
+  }
+
+  div {
+    width: 100%;
+    padding: 100px;
+  }
+
+  .one {
+    background: thistle;
+  }
+
+  .two {
+    background: mistyrose;
+  }
+
+  .three {
+    background: coral;
+  }
+</style>
+
+<button></button>
+<script>
+  //bubbling: 한 가지 요소가 다른 요소들(부모들)을 연쇄적으로 건드림으로써 그들의 핸들러를 동작시키는 현상
+  //즉, 버블링이 발생하면 이벤트가 상위 요소로 전파됨
+
+  //반면, capturing은 이벤트가 하위 요소로 타고 내려가는 것이다.
+
+  //실제로 이벤트의 동작 순서는 부모를 타고 내려가다가(capturing) 
+  //선택된 요소에서 다시 부모로 타고 올라가는 단계(bubbling)으로 이루어진다.
+
+  const divs = document.querySelectorAll('div');
+  const button = document.querySelector('button');
+
+  function logText(e) {
+    console.log(this.classList.value);
+
+    // 아래 함수는 버블링을 방지하는 함수임
+    e.stopPropagation();
+  }
+
+  divs.forEach(div => div.addEventListener('click', logText, {
+    //만약 아래 옵션을 true로 설정하면 출력이 three, teo, one이 아니라 one, two, three 순으로 나타나게 된다.
+    //이는 capture 옵션을 실행함으로써 bubbling이 일어나기 전에 capturing단계에서 이벤트를 수행해 버리는 것이다.
+    capture: false,
+
+    //아래 옵션은 클릭이 여러 번 발생하더라도 함수가 한 번만 실행되도록 함
+    once: true
+  }));
+
+  button.addEventListener('click', () => {
+    console.log('Click!');
+  }, {
+    once: true
+  });
+</script>
+</body>
+</html>
