@@ -36,12 +36,20 @@
   const uncheckAll = document.querySelector("#uncheck-items");
   //로컬 저장소에 저장된 string을 다시 객체로 parse하여 가져옴
   const items = JSON.parse(localStorage.getItem('items')) || [];
+  const nameList = [];
 
   function addItem(e) {
 
     //submit 할 때 마다 페이지가 reload 되는 것 방지
     e.preventDefault();
     const text = (this.querySelector('[name=item]')).value;
+
+    for(i=0; i < items.length; i++){
+      if(items[i].text === text){
+        alert(`${text} is already in the list`);
+        return;
+      }
+    };
 
     const item = {
       text, //text: text
