@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="6강.css">
+</head>
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+<script>
+  const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+  
+  const cities = [];
+
+  //아래 코드에서 cities.push(data)를 할 경우 
+  //리스트 안에 리스트가 들어가는 형태로 리스트가 생성됨
+  //cities.push(...data)를 해줘야 도시 리스트의 내용이 개별적인 리스트 요소로 들어감
+  fetch(endpoint)
+    .then(blob => blob.json())
+    .then(data => cities.push(...data));
+
+  function findMatches(wordToMatch, cities) {
+    return cities.filter(place => {
+      //이하 입력되는 단어를 포함하는 도시나 주를 찾는 코드 
+      //RegExp함수에서 g는 문자열 전체를 확인한다는 의미이고 i는 대소문자 구분을 하지 않는다는 의미이다.
+      const regex = new RegExp(wordToMatch, 'gi');
+      return place.city.match(regex) || place.state.match(regex)
+    })
+  }
+
+  function numberWithCommas(x) {
+    //이하 천 단위 구분자(,) 넣어주는 코드
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function displayMatches() {
+    const MatchArray = findMatches(this.value, cities);
+    const html = MatchArray.map(place => {
+      const regex = new RegExp(this.value, 'gi');
+      //아래 코드는 검색되어 나열된 결과에서 검색어 부분을 highlight해주는 것
+      const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+      const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+      return `
+        <li>
+          <span class="name">${cityName}, ${stateName}</span>
+          <span class="population">${numberWithCommas(place.population)}</span>
+        </li>
+      `;
+    }).join('');
+    suggestions.innerHTML = html;
+  }
+
+  const searchInput = document.querySelector('.search');
+  const suggestions = document.querySelector('.suggestions');
+
+  searchInput.addEventListener('change', displayMatches);
+  searchInput.addEventListener('keyup', displayMatches);
+
+</script>
+</body>
+</html>
