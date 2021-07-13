@@ -8,17 +8,15 @@
 </head>
 <body>
     <div>
-        <h1><a href="">Django Girls Blog</a></h1>
+        <h1><a href="/">Django Girls Blog</a></h1>
     </div>
-    <div>
-        <p>published: 13.07.2021, 19:00</p>
-        <h2><a href="">My first post</a></h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium iusto optio corrupti, commodi delectus, cumque veritatis eos quaerat eaque possimus iste obcaecati harum sapiente quod non consequuntur quo ipsum animi.</p>
-    </div>
-    <div>
-        <p>published: 13.07.2021, 19:00</p>
-        <h2><a href="">My second post</a></h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam corrupti, sed voluptatem cupiditate tenetur consectetur omnis quos fuga sapiente maiores. Sed dolorem amet id quo voluptates, ad expedita possimus quas.</p>
-    </div>
+
+    {% for post in posts %}
+        <div>
+            <p>published: {{ post.published_date }}</p>
+            <h2><a href="">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
 </body>
 </html>
