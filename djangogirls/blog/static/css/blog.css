@@ -64,7 +64,7 @@ h4 {
   background-color: lightyellow;
   border-radius: 10%;
   align-items: flex-start;
-  padding-left: 20px;
+  padding: 20px;
 }
 
 .post h1 a,
