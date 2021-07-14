@@ -58,7 +58,9 @@ h4 {
 }
 
 .post {
+  display: flex;
   margin-bottom: 70px;
+  background-color: lightyellow;
 }
 
 .post h1 a,
