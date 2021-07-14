@@ -20,6 +20,7 @@ body {
   color: #ffffff;
   font-size: 36pt;
   text-decoration: none;
+  font-family: "Lobster";
 }
 
 .content {
@@ -35,6 +36,7 @@ h4 {
 
 .date {
   color: #828282;
+  font-family: "Noto Serif KR", serif;
 }
 
 .save {
@@ -62,4 +64,5 @@ h4 {
 .post h1 a,
 .post h1 a:visited {
   color: #000000;
+  font-family: "Noto Serif KR", serif;
 }
