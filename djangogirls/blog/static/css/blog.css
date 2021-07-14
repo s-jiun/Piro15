@@ -63,6 +63,8 @@ h4 {
   margin-bottom: 70px;
   background-color: lightyellow;
   border-radius: 10%;
+  align-items: flex-start;
+  padding-left: 20px;
 }
 
 .post h1 a,
