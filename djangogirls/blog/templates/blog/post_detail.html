@@ -11,9 +11,7 @@
         <img src="https://picsum.photos/200/300?random=2"/>
         <p>{{ post.text|linebreaksbr }}</p>
         {% if user.is_authenticated %}
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a class="btn" href="{% url 'post_edit' pk=post.pk %}"><i class="fas fa-pencil-alt"></i></a>
-            </div>
+            <a class="btn edit" href="{% url 'post_edit' pk=post.pk %}"><i class="fas fa-pencil-alt fa-2x"></i></a>
         {% endif %}
     </div>
 {% endblock %}

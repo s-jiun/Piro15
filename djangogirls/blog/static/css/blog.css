@@ -72,3 +72,6 @@ h4 {
   color: #000000;
   font-family: "Hi Melody", cursive;
 }
+.edit {
+  display: flex;
+}
