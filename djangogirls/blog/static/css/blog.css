@@ -75,9 +75,13 @@ h4 {
 
 .edit {
   position: relative;
-  right: 30px;
+  left: 1050px;
 }
 
 .post-content {
   display: flex;
+}
+
+p {
+  margin-right: 10px;
 }
