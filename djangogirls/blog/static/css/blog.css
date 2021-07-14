@@ -69,3 +69,7 @@ h4 {
   color: #000000;
   font-family: "Noto Serif KR", serif;
 }
+
+.post-list {
+  display: flex;
+}
