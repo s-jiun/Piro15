@@ -7,8 +7,10 @@
                 {{ post.published_date }}
             </div>
             <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-            <img src="https://picsum.photos/200/300?random=2"/>
-            <p>{{ post.text|linebreaksbr }}</p>
+            <div class="post-content">
+                <img src="https://picsum.photos/200/300?random=2"/>
+                <p>{{ post.text|linebreaksbr }}</p>
+            </div>
             
         </div>
     {% endfor %}
