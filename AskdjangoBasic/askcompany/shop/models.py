@@ -1,5 +1,7 @@
 from re import T
 from django.db import models
+from django.conf import settings
+from django.db.models.base import Model
 
 # Create your models here.
 
@@ -16,3 +18,7 @@ class Item(models.Model):
     
     class Meta:
         ordering = ['id']
+
+
+#class Post(models.Model):
+#    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

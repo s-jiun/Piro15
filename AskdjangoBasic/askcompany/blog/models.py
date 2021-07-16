@@ -4,6 +4,7 @@ from django.conf import settings
 # Create your models here.
 
 class Post(models.Model):
+    #author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='+')
     author_name = models.CharField(max_length=20)
     title = models.CharField(max_length=100, db_index=True)
     content = models.TextField()
