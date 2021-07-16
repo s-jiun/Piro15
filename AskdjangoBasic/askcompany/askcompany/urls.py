@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import debug_toolbar
 from django.contrib import admin
 from django.http import HttpResponse
 from django.urls import path, include
@@ -26,4 +27,5 @@ urlpatterns = [
     path('mysum/<int:x>/<int:y>/', mysum),
     path('blog/', include('blog.urls')),
     path('shop/', include('shop.urls')),
+    path('__debug__/', include(debug_toolbar.urls)),
 ]
