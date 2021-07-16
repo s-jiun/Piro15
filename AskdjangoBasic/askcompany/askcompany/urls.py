@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.http import HttpResponse
-from django.urls import path
+from django.urls import path, include
 
 def mysum(request, x, y):
     result = x + y
@@ -23,5 +23,6 @@ def mysum(request, x, y):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('mysum/<int:x>/<int:y>/', mysum)
+    path('mysum/<int:x>/<int:y>/', mysum),
+    path('shop/', include('shop.urls')),
 ]
