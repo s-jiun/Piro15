@@ -25,4 +25,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('mysum/<int:x>/<int:y>/', mysum),
     path('blog/', include('blog.urls')),
+    path('shop/', include('shop.urls')),
 ]
