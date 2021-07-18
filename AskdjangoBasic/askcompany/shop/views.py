@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from .models import Item
 
 def item_list(request):
@@ -12,4 +12,6 @@ def item_list(request):
         'q' : q,
     })
 
-# Create your views here.
+def item_detail(request, pk):
+    item = get_object_or_404(Item, pk=pk)
+    return render(request, 'shop/item_detail.html', {'item': item})
