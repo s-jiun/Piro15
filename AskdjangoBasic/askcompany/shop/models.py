@@ -2,6 +2,7 @@ from re import T
 from django.db import models
 from django.conf import settings
 from django.db.models.base import Model
+from django.urls import reverse
 from askcompany.utils import uuid_upload_to
 
 # Create your models here.
@@ -20,6 +21,10 @@ class Item(models.Model):
     
     class Meta:
         ordering = ['id']
+
+    def get_absolute_url(self):
+        return reverse('shop:item_detail', args=[self.pk])
+        #return reverse('shop:item_detail', kwargs={'pk':self.pk})
 
 
 #class Post(models.Model):

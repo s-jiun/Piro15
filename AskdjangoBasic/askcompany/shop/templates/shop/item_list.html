@@ -9,7 +9,7 @@
     <ul>
         {% for item in item_list %}
             <li>
-                <a href="/shop/{{ item.pk }}/">
+                <a href="{{ item.get_absolute_url }}">
                     <h3>{{ item.name }}</h3>
                 </a>
                 <h4>가격: {{ item.price }}</h4>
