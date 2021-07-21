@@ -5,4 +5,4 @@ from .models import Idea
 
 @admin.register(Idea)
 class IdeaAdmin(admin.ModelAdmin):
-    list_display=['pk', 'name', 'likes']
+    list_display=['pk', 'title', 'interest']

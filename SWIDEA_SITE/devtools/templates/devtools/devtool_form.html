@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container">
+            <h1>DevTool Register</h1>
+            <br />
+            <p>개발툴 등록 페이지 입니다. 자신이 다룰 수 있는 개발툴을 등록하거나 수정해보세요</p>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+
+            <input type="submit" value="submit" />
+        </form>
+    </div>
+{% endblock %}

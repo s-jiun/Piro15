@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container">
+        <h1>Idea Detail</h1>
+        <br />
+        <p>아이디어 세부내용 페이지 입니다. 당신이 구현하려 한 아이디어를 자세히 살펴보세요</p>
+        <div class="row row-cols-2">
+            <div class="col w-50">
+                <img src="{{ idea.image.url }}" style="width: 500px;"/>
+            </div>
+            <div class="col w-50">
+                <h1>{{ idea.title }}</h1>
+                <br/>
+                <p>1) 아이디어 관심도: {{ idea.interest }}</p>
+                <br/>
+                <p>2) 예상 개발 툴: {{ idea.devtool }}</p>
+                <br/>
+                <p>3) 아이디어 설명: </p>
+                {{ idea.content }}
+            </div>
+        </div>
+        <div class="col">
+            <a onclick="return confirm('정말 삭제하시겠습니까?');" href="{% url 'ideas:idea_delete' idea.pk %}">삭제</a> 
+            <a href="{% url 'ideas:idea_list' %}">목록</a> 
+            <a href="{% url 'ideas:idea_update' idea.pk %}">수정</a> 
+        </div>
+    </div>
+{% endblock %}

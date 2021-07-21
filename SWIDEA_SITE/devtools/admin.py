@@ -5,4 +5,4 @@ from .models import DevTool
 
 @admin.register(DevTool)
 class DevToolAdmin(admin.ModelAdmin):
-    list_display = ['pk', 'tool_name', 'type']
+    list_display = ['pk', 'name', 'kind']
