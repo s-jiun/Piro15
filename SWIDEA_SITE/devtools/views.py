@@ -31,7 +31,7 @@ def devtool_register(request):
         form = DevToolForm(request.POST)
         if form.is_valid():
             devtool = form.save()
-            return redirect('devtools:devtool_list')
+            return redirect('devtools:devtool_detail', pk=devtool.pk)
     else:
         form = DevToolForm()
     return render(request, template_name='devtools/devtool_form.html', context={'form':form})

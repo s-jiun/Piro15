@@ -30,7 +30,7 @@ def idea_register(request):
         form = IdeaForm(request.POST, request.FILES)
         if form.is_valid():
             idea = form.save()
-            return redirect('ideas:idea_list')
+            return redirect('ideas:idea_detail', pk=idea.pk)
     else:
         form = IdeaForm()
     return render(request, template_name='ideas/idea_form.html', context={'form':form})
