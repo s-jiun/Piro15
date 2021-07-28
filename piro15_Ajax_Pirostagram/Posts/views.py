@@ -2,7 +2,7 @@ import json
 from django.http.response import JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-from .models import Post
+from .models import Comment, Post
 from .forms import PostForm
 
 # Create your views here.
@@ -32,7 +32,7 @@ def create_post(request, post=None):
         return render(request, 'Posts/create_post.html', ctx)
 
 @csrf_exempt
-def likes(request):
+def like_ajax(request):
     req = json.loads(request.body)
     post_id = req['id']
 
@@ -45,3 +45,14 @@ def likes(request):
 
     post.save()
     return JsonResponse({'id': post_id})
+
+@csrf_exempt
+def add_ajax(request):
+    req = json.loads(request.body)
+    post_id = req['id']
+    content = req['content']
+    post=Post.objects.get(id=post_id)
+    comment = Comment.objects.create(post=post, content=content)
+
+    post.save()
+    return JsonResponse({'post_id': post_id, 'comment_id': comment.id, 'content': comment.text})

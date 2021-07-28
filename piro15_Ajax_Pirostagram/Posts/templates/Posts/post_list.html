@@ -12,7 +12,7 @@
 {% block content %}
     <div class='container'>
         {% for post in posts %}
-            <div class='inner-box'>
+            <div class='inner-box post-{{ post.id }}'>
                 <div class="profile">
                     <div class='profile-image'><img src="http://placekitten.com/200/300" alt='' /></div>
                     <h3>{{ post.writer }}</h3>
@@ -29,18 +29,29 @@
                 <div class='comment'>
                     <h4>댓글</h4>
                 </div>
+                <div class='comment-list'>
+                    {% for reply in post.comment.all %}
+                        <div class='reply comment-{{ reply.id }}'>
+                            {{reply.text}}
+                            <button onclick="onClickDelete({{ post.id }}, {{ reply.id }})">Delete</button>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class='add-comment'>
+                    <input type="text" placeholder="댓글달기">
+                    <button onclick="onClickAdd({{ post.id }})">Submit</button>
+                </div>
                 <div class='likes post-id-{{ post.id }}'>
-                    <button class = 'heart' onclick="onClickLike({{ post.id }})">
-                        {% if post.preference == False %}
-                            <i class="far fa-heart"></i>
-                        {% else %}
-                            <i class="fas fa-heart"></i>
-                        {% endif %}
-                    </button>
                     {% if post.preference == False %}
-                        <p>게시물이 마음에 드시면 좋아요를 눌러주세요!</p>
+                        <button class = 'heart' onclick="onClickLike({{ post.id }})">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <p class='like_text'>게시물이 마음에 드시면 좋아요를 눌러주세요!</p>
                     {% else %}
-                        <p>게시물에 좋아요를 누르셨습니다!</p>
+                        <button class = 'heart' onclick="onClickLike({{ post.id }})">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        <p class='like_text'>게시물에 좋아요를 누르셨습니다!</p>
                     {% endif %}
                 </div>
             </div>
@@ -51,7 +62,7 @@
         const requestLike = new XMLHttpRequest();
         
         const onClickLike = (id) => {
-            const url = '/likes/';
+            const url = '/like_ajax/';
             requestLike.open('POST', url, true);
             requestLike.setRequestHeader(
                 'Content-Type',
@@ -63,12 +74,15 @@
         const likeHandleResponse = () => {
             if(requestLike.status < 400){
                 const {id} = JSON.parse(requestLike.response);
-                const element = document.querySelector(`.post-id-${id} .heart`);
-                const heart = element.innerHTML;
+                const element1 = document.querySelector(`.post-id-${id} .heart`);
+                const element2 = document.querySelector(`.post-id-${id} .like_text`);
+                const heart = element1.innerHTML;
                 if (heart == '<i class="fas fa-heart"></i>'){
-                    element.innerHTML = `<i class="far fa-heart"></i>`
+                    element1.innerHTML = `<i class="far fa-heart"></i>`
+                    element2.innerHTML = `게시물이 마음에 드시면 좋아요를 눌러주세요!`
                 }else if(heart == '<i class="far fa-heart"></i>'){
-                    element.innerHTML = `<i class="fas fa-heart"></i>`
+                    element1.innerHTML = `<i class="fas fa-heart"></i>`
+                    element2.innerHTML = `게시물에 좋아요를 누르셨습니다!`
                 }
 
             }
@@ -79,5 +93,39 @@
                 likeHandleResponse();
             }
         }
+
+        const requestAdd = new XMLHttpRequest();
+
+        const onClickAdd = (id) => {
+            const url = '/add_ajax/';
+            requestAdd.open('POST', url, true);
+            requestAdd.setRequestHeader(
+                'Content-Type',
+                'application/x-www-form-urlencoded'
+            );
+            const content=document.querySelector(`.post-${id} .reply`).value
+            requestAdd.send(JSON.stringify({id: id, content: content}));
+        };
+
+        const AddHandleResponse = () => {
+            if(requestAdd.status < 400) {
+                const {post_id, content, comment_id} = JSON.parse(requestAdd.response);
+                const element = document.querySelector('.post-${post_id} .comment-list');
+                element.innerHTML += `
+                <div class='comment-${comment_id}'>
+                    ${content}
+                    <button onclick="onClickDelete({{ post.id }}, {{ reply.id }})">Delete</button>
+                </div>`;
+                const input=document.querySelector(`.post-${post_id} .text`);
+                input.value = null;
+            }
+        };
+
+        requestAdd.onreadystatechange = () => {
+            if(requestAdd.readyState === XMLHttpRequest.DONE){
+                AddHandleResponse();
+            }
+        };
+
     </script>
 {% endblock %}
