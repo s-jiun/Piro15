@@ -102,17 +102,18 @@
                 'application/x-www-form-urlencoded'
             );
             const content=document.querySelector(`.post-${id} .added-text`).value
+            console.log(content);
             requestAdd.send(JSON.stringify({id: id, content: content}));
         };
 
         const AddHandleResponse = () => {
             if(requestAdd.status < 400) {
                 const {post_id, content, comment_id} = JSON.parse(requestAdd.response);
-                const element = document.querySelector('.post-${post_id} .comment-list');
+                const element = document.querySelector(`.post-${post_id} .comment-list`);
                 element.innerHTML += `
-                <div class='comment-${comment_id}'>
+                <div class='reply comment-${comment_id}'>
                     ${content}
-                    <button onclick="onClickDelete({{ post.id }}, {{ reply.id }})">Delete</button>
+                    <button onclick="onClickDelete(${post_id}, ${comment_id})">Delete</button>
                 </div>`;
                 const input=document.querySelector(`.post-${post_id} .added-text`);
                 input.value = null;
@@ -134,14 +135,14 @@
                 'Content-Type',
                 'application/x-www-form-urlencoded'
             );
-            requestAdd.send(JSON.stringify({post_id: post_id, comment_id: comment_id}));
+            requestDelete.send(JSON.stringify({post_id: post_id, comment_id: comment_id}));
         };
 
         const DeleteHandleResponse = () => {
             if(requestAdd.status < 400) {
                 const {post_id, content, comment_id} = JSON.parse(requestDelete.response);
-                const element = document.querySelector('.post-${post_id} comment-${comment_id}');
-                element.innerHTML -= '';
+                const element = document.querySelector(`.post-${post_id} .comment-${comment_id}`);
+                element.innerHTML = '';
             }
         };
 
