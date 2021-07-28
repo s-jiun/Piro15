@@ -48,6 +48,7 @@ def like_ajax(request):
 
 @csrf_exempt
 def add_ajax(request):
+    print('view')
     req = json.loads(request.body)
     post_id = req['id']
     content = req['content']
@@ -56,3 +57,14 @@ def add_ajax(request):
 
     post.save()
     return JsonResponse({'post_id': post_id, 'comment_id': comment.id, 'content': comment.text})
+
+@csrf_exempt
+def delete_ajax(request):
+    req = json.loads(request.body)
+    post_id = req['id']
+    comment_id = req['comment_id']
+    post = Post.objects.get(id=post_id)
+    Comment.objects,get(post=post, id=comment_id).delete()
+
+    post.save()
+    return JsonResponse({'post_id': post_id, 'comment_id': comment_id})

@@ -70,11 +70,14 @@
 .likes button {
   border: none;
   background-color: white;
+  cursor: pointer;
 }
 
 .comment-list {
   display: flex;
   flex-direction: column;
+  padding: 5px;
+  border-bottom: solid 1px gray;
 }
 
 .reply {

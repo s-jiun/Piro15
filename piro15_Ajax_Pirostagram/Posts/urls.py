@@ -9,4 +9,5 @@ urlpatterns = [
     path('create/', views.create_post, name='create_post'),
     path('like_ajax/', views.like_ajax, name='like_ajax'),
     path('add_ajax/', views.add_ajax, name='add_ajax'),
+    path('delete_ajax/', views.delete_ajax, name='delete_ajax'),
 ]

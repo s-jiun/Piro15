@@ -38,19 +38,15 @@
                     {% endfor %}
                 </div>
                 <div class='add-comment'>
-                    <input type="text" placeholder="댓글달기">
+                    <input class = 'added-text' type="text" placeholder="댓글달기">
                     <button onclick="onClickAdd({{ post.id }})">Submit</button>
                 </div>
                 <div class='likes post-id-{{ post.id }}'>
                     {% if post.preference == False %}
-                        <button class = 'heart' onclick="onClickLike({{ post.id }})">
-                            <i class="far fa-heart"></i>
-                        </button>
+                        <button class = 'heart' onclick="onClickLike({{ post.id }})"><i class="far fa-heart"></i></button>
                         <p class='like_text'>게시물이 마음에 드시면 좋아요를 눌러주세요!</p>
                     {% else %}
-                        <button class = 'heart' onclick="onClickLike({{ post.id }})">
-                            <i class="fas fa-heart"></i>
-                        </button>
+                        <button class = 'heart' onclick="onClickLike({{ post.id }})"><i class="fas fa-heart"></i></button>
                         <p class='like_text'>게시물에 좋아요를 누르셨습니다!</p>
                     {% endif %}
                 </div>
@@ -74,9 +70,11 @@
         const likeHandleResponse = () => {
             if(requestLike.status < 400){
                 const {id} = JSON.parse(requestLike.response);
+                console.log(id)
                 const element1 = document.querySelector(`.post-id-${id} .heart`);
                 const element2 = document.querySelector(`.post-id-${id} .like_text`);
                 const heart = element1.innerHTML;
+                console.log(heart)
                 if (heart == '<i class="fas fa-heart"></i>'){
                     element1.innerHTML = `<i class="far fa-heart"></i>`
                     element2.innerHTML = `게시물이 마음에 드시면 좋아요를 눌러주세요!`
@@ -92,7 +90,7 @@
             if(requestLike.readyState === XMLHttpRequest.DONE){
                 likeHandleResponse();
             }
-        }
+        };
 
         const requestAdd = new XMLHttpRequest();
 
@@ -103,7 +101,7 @@
                 'Content-Type',
                 'application/x-www-form-urlencoded'
             );
-            const content=document.querySelector(`.post-${id} .reply`).value
+            const content=document.querySelector(`.post-${id} .added-text`).value
             requestAdd.send(JSON.stringify({id: id, content: content}));
         };
 
@@ -116,7 +114,7 @@
                     ${content}
                     <button onclick="onClickDelete({{ post.id }}, {{ reply.id }})">Delete</button>
                 </div>`;
-                const input=document.querySelector(`.post-${post_id} .text`);
+                const input=document.querySelector(`.post-${post_id} .added-text`);
                 input.value = null;
             }
         };
@@ -124,6 +122,32 @@
         requestAdd.onreadystatechange = () => {
             if(requestAdd.readyState === XMLHttpRequest.DONE){
                 AddHandleResponse();
+            }
+        };
+
+        const requestDelete = new XMLHttpRequest();
+
+        const onClickDelete = (post_id, comment_id) => {
+            const url = '/delete_ajax/';
+            requestDelete.open('POST', url, true);
+            requestDelete.setRequestHeader(
+                'Content-Type',
+                'application/x-www-form-urlencoded'
+            );
+            requestAdd.send(JSON.stringify({post_id: post_id, comment_id: comment_id}));
+        };
+
+        const DeleteHandleResponse = () => {
+            if(requestAdd.status < 400) {
+                const {post_id, content, comment_id} = JSON.parse(requestDelete.response);
+                const element = document.querySelector('.post-${post_id} comment-${comment_id}');
+                element.innerHTML -= '';
+            }
+        };
+
+        requestDelete.onreadystatechange = () => {
+            if(requestDelete.readyState === XMLHttpRequest.DONE){
+                DeleteHandleResponse();
             }
         };
 
