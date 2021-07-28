@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'post_list.css' %}" />
+{% endblock %}
+
+{% block header %}
+    <span id='create'><a href="{% url 'Posts:create_post' %}">게시물 작성</a></span>
+{% endblock %}
+
+{% block content %}
+    <div class='container'>
+        {% for post in posts %}
+            <div class='inner-box'>
+                <div class="profile">
+                    <div class='profile-image'><img src="http://placekitten.com/200/300" alt='' /></div>
+                    <h3>{{ post.writer }}</h3>
+                </div>
+                <div class='image'>
+                    <img src="{{ post.photo.url }}" />
+                </div>
+                <div class='text'>
+                    <h3>{{ post.title }}</h3>
+                    <span>
+                        {{ post.content }}
+                    </span>
+                </div>
+                <div class='comment'>
+                    <h4>댓글</h4>
+                </div>
+                <div class='likes post-id-{{ post.id }}'>
+                    <button class = 'heart' onclick="onClickLike({{ post.id }})">
+                        {% if post.preference == False %}
+                            <i class="far fa-heart"></i>
+                        {% else %}
+                            <i class="fas fa-heart"></i>
+                        {% endif %}
+                    </button>
+                    {% if post.preference == False %}
+                        <p>게시물이 마음에 드시면 좋아요를 눌러주세요!</p>
+                    {% else %}
+                        <p>게시물에 좋아요를 누르셨습니다!</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        const requestLike = new XMLHttpRequest();
+        
+        const onClickLike = (id) => {
+            const url = '/likes/';
+            requestLike.open('POST', url, true);
+            requestLike.setRequestHeader(
+                'Content-Type',
+                'application/x-www-form-urlencoded'
+            );
+            requestLike.send(JSON.stringify({id: id}));
+        };
+
+        const likeHandleResponse = () => {
+            if(requestLike.status < 400){
+                const {id} = JSON.parse(requestLike.response);
+                const element = document.querySelector(`.post-id-${id} .heart`);
+                const heart = element.innerHTML;
+                if (heart == '<i class="fas fa-heart"></i>'){
+                    element.innerHTML = `<i class="far fa-heart"></i>`
+                }else if(heart == '<i class="far fa-heart"></i>'){
+                    element.innerHTML = `<i class="fas fa-heart"></i>`
+                }
+
+            }
+        }
+
+        requestLike.onreadystatechange = () => {
+            if(requestLike.readyState === XMLHttpRequest.DONE){
+                likeHandleResponse();
+            }
+        }
+    </script>
+{% endblock %}

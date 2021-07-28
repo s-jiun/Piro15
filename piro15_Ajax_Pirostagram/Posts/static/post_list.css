@@ -1,0 +1,73 @@
+#create {
+  position: absolute;
+  right: 80px;
+  top: 15px;
+}
+
+.container img {
+  width: 30%;
+}
+
+.inner-box {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px gray;
+  margin: 20px 100px;
+  padding: 20px;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+  border: solid 1px gray;
+  border-left: hidden;
+  border-right: hidden;
+}
+
+.image img {
+  margin: 10px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+}
+
+.text span {
+  height: 100px;
+  border-bottom: solid 1px gray;
+}
+
+.profile {
+  display: flex;
+}
+
+.profile h3 {
+  margin-left: 20px;
+}
+
+.profile-image img {
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+  padding: 2px;
+  border: solid 2px;
+  border-color: gray;
+  border-radius: 100%;
+}
+
+.comment {
+  display: flex;
+  border-bottom: solid 1px gray;
+}
+
+.likes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.likes button {
+  border: none;
+  background-color: white;
+}
